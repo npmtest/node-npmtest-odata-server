@@ -1,0 +1,610 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-odata-server/node_modules/odata-server/newsreader/context.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-odata-server">npmtest-odata-server (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-odata-server/node_modules/odata-server/newsreader/context.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">17.54% <small>(10 / 57)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">17.54% <small>(10 / 57)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> » <a href="index.html">node-npmtest-odata-server/node_modules/odata-server/newsreader/</a> » context.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">$data.Class.define("$news.Types.Category", $data.Entity, null, {
+    Id: { type: "id", key: true, computed: true },
+    Title: { type: "string" },
+    Articles: { type: "Array", elementType: "$news.Types.Article", inverseProperty: "Category" }
+}, null);
+&nbsp;
+$data.Class.define("$news.Types.Article", $data.Entity, null, {
+    Id: { type: "id", key: true, computed: true },
+    //RowVersion: { type: $data.Blob, concurrencyMode: $data.ConcurrencyMode.Fixed },
+    Title: { type: "string" },
+    Lead: { type: "string" },
+    Body: { type: "string" },
+    CreateDate: { type: "datetime" },
+    Thumbnail_LowRes: { type: "blob" },
+    Thumbnail_HighRes: { type: "blob" },
+    Category: { type: "$news.Types.Category", inverseProperty: "Articles" },
+    Tags: { type: "Array", elementType: "$news.Types.TagConnection", inverseProperty: "Article" },
+    Author: { type: "$news.Types.User", inverseProperty: "Articles" },
+    Reviewer: { type: "$news.Types.User", inverseProperty: "ReviewedArticles" }
+}, null);
+&nbsp;
+$data.Class.define("$news.Types.TagConnection", $data.Entity, null, {
+    Id: { type: "id", key: true, computed: true },
+    Article: { type: "$news.Types.Article", inverseProperty: "Tags" },
+    Tag: { type: "$news.Types.Tag", inverseProperty: "Articles" }
+}, null);
+&nbsp;
+$data.Class.define("$news.Types.Tag", $data.Entity, null, {
+    Id: { type: "id", key: true, computed: true },
+    Title: { type: "string" },
+    Articles: { type: "Array", elementType: "$news.Types.TagConnection", inverseProperty: "Tag" }
+}, null);
+&nbsp;
+$data.Class.define("$news.Types.User", $data.Entity, null, {
+    Id: { type: "id", key: true, computed: true },
+    LoginName: { type: "string" },
+    Email: { type: "string" },
+    Articles: { type: "Array", elementType: "$news.Types.Article", inverseProperty: "Author" },
+    ReviewedArticles: { type: "Array", elementType: "$news.Types.Article", inverseProperty: "Reviewer" },
+    Profile: { type: "$news.Types.UserProfile", inverseProperty: "User" }
+}, null);
+&nbsp;
+$data.Class.define("$news.Types.UserProfile", $data.Entity, null, {
+    Id: { type: "id", key: true, computed: true },
+    FullName: { type: "string" },
+    Bio: { type: "string" },
+    Avatar: { type: "blob" },
+    Location: { type: "$news.Types.Location" },
+    Birthday: { type: "date" },
+    User: { type: "$news.Types.User", inverseProperty: "Profile", required: true }
+}, null);
+&nbsp;
+$data.Class.define("$news.Types.Location", $data.Entity, null, {
+    Address: { type: "string" },
+    City: { type: "string" },
+    Zip: { type: "int" },
+    Country: { type: "string" }
+}, null);
+&nbsp;
+$data.Class.define("$news.Types.NewsContext", $data.EntityContext, null, {
+    Categories: { type: $data.EntitySet, elementType: $news.Types.Category },
+    Articles: { type: $data.EntitySet, elementType: $news.Types.Article, roles: ['anonymous'] },
+    TagConnections: { type: $data.EntitySet, elementType: $news.Types.TagConnection },
+    Tags: { type: $data.EntitySet, elementType: $news.Types.Tag },
+    Users: { type: $data.EntitySet, elementType: $news.Types.User },
+    UserProfiles: { type: $data.EntitySet, elementType: $news.Types.UserProfile }
+}, null);
+&nbsp;
+$news.Types.NewsContext.generateTestData = <span class="fstat-no" title="function not covered">function (context, callBack) {</span>
+<span class="cstat-no" title="statement not covered">    var usr1 = new $news.Types.User({ LoginName: "Usr1", Email: "usr1@company.com", Profile: new $news.Types.UserProfile({ FullName: "Full Name", Bio: "Bio1", Birthday: new Date(Date.parse("1975/01/01")), Location: new $news.Types.Location({ Zip: 2840, City: 'City1', Address: 'Address6', Country: 'Country1' }) }) });</span>
+<span class="cstat-no" title="statement not covered">    var usr2 = new $news.Types.User({ LoginName: "Usr2", Email: "usr2@company.com", Profile: new $news.Types.UserProfile({ FullName: "Full Name", Bio: "Bio2", Birthday: new Date(Date.parse("1976/02/01")), Location: new $news.Types.Location({ Zip: 1117, City: 'City2', Address: 'Address7', Country: 'Country2' }) }) });</span>
+<span class="cstat-no" title="statement not covered">    var usr3 = new $news.Types.User({ LoginName: "Usr3", Email: "usr3@company.com", Profile: new $news.Types.UserProfile({ FullName: "Full Name1", Bio: "Bio3", Birthday: new Date(Date.parse("1977/03/01")), Location: new $news.Types.Location({ Zip: 1115, City: 'City3', Address: 'Address8', Country: 'Country3' }) }) });</span>
+<span class="cstat-no" title="statement not covered">    var usr4 = new $news.Types.User({ LoginName: "Usr4", Email: "usr4@company.com", Profile: new $news.Types.UserProfile({ FullName: "Full Name1", Bio: "Bio4", Birthday: new Date(Date.parse("1978/04/01")), Location: new $news.Types.Location({ Zip: 1211, City: 'City4', Address: 'Address9', Country: 'Country4' }) }) });</span>
+<span class="cstat-no" title="statement not covered">    var usr5 = new $news.Types.User({ LoginName: "Usr5", Email: "usr5@company.com", Profile: new $news.Types.UserProfile({ FullName: "Full Name2", Bio: "Bio5", Birthday: new Date(Date.parse("1979/05/01")), Location: new $news.Types.Location({ Zip: 3451, City: 'City5', Address: 'Address0', Country: 'Country5' }) }) });</span>
+<span class="cstat-no" title="statement not covered">    var usr6 = new $news.Types.User({ LoginName: "StartsWithTest", Email: "swt@company.com", Profile: new $news.Types.UserProfile({ FullName: "Starts With Test", Bio: "Bio6", Birthday: new Date(Date.parse("1980/06/01")), Location: new $news.Types.Location({ Zip: 8475, City: 'City6', Address: 'Address7', Country: 'Country8' }) }) });</span>
+<span class="cstat-no" title="statement not covered">    var cat1 = new $news.Types.Category({ Title: "Sport" });</span>
+<span class="cstat-no" title="statement not covered">    var cat2 = new $news.Types.Category({ Title: "World" });</span>
+<span class="cstat-no" title="statement not covered">    var cat3 = new $news.Types.Category({ Title: "Politics" });</span>
+<span class="cstat-no" title="statement not covered">    var cat4 = new $news.Types.Category({ Title: "Tech" });</span>
+<span class="cstat-no" title="statement not covered">    var cat5 = new $news.Types.Category({ Title: "Health" });</span>
+<span class="cstat-no" title="statement not covered">    var tag1 = new $news.Types.Tag({ Title: "Tag1" });</span>
+<span class="cstat-no" title="statement not covered">    var tag2 = new $news.Types.Tag({ Title: "Tag2" });</span>
+<span class="cstat-no" title="statement not covered">    var tag3 = new $news.Types.Tag({ Title: "Tag3" });</span>
+<span class="cstat-no" title="statement not covered">    var tag4 = new $news.Types.Tag({ Title: "Tag4" });</span>
+<span class="cstat-no" title="statement not covered">    var tag5 = new $news.Types.Tag({ Title: "Tag5" });</span>
+<span class="cstat-no" title="statement not covered">    context.Tags.add(tag4);</span>
+<span class="cstat-no" title="statement not covered">    context.Tags.add(tag5);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article1", Lead: "Lead1", Body: "Body1", CreateDate: new Date(), Category: cat1, Author: usr1, Reviewer: usr6, Tags: [new $news.Types.TagConnection({ Tag: tag1 }), new $news.Types.TagConnection({ Tag: tag2 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article2", Lead: "Lead2", Body: "Body2", CreateDate: new Date(), Category: cat1, Author: usr2, Reviewer: usr5, Tags: [new $news.Types.TagConnection({ Tag: tag2 }), new $news.Types.TagConnection({ Tag: tag3 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article3", Lead: "Lead3", Body: "Body3", CreateDate: new Date(), Category: cat1, Author: usr3, Reviewer: usr4, Tags: [new $news.Types.TagConnection({ Tag: tag3 }), new $news.Types.TagConnection({ Tag: tag1 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article4", Lead: "Lead4", Body: "Body4", CreateDate: new Date(), Category: cat1, Author: usr4, Reviewer: usr3, Tags: [new $news.Types.TagConnection({ Tag: tag1 }), new $news.Types.TagConnection({ Tag: tag2 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article5", Lead: "Lead5", Body: "Body5", CreateDate: new Date(), Category: cat1, Author: usr5, Reviewer: usr2, Tags: [new $news.Types.TagConnection({ Tag: tag2 }), new $news.Types.TagConnection({ Tag: tag3 })] }));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article21", Lead: "Lead21", Body: "Body21", CreateDate: new Date(), Category: cat2, Author: usr1, Reviewer: usr1, Tags: [new $news.Types.TagConnection({ Tag: tag3 }), new $news.Types.TagConnection({ Tag: tag1 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article22", Lead: "Lead22", Body: "Body22", CreateDate: new Date(), Category: cat2, Author: usr2, Reviewer: usr6, Tags: [new $news.Types.TagConnection({ Tag: tag1 }), new $news.Types.TagConnection({ Tag: tag2 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article23", Lead: "Lead23", Body: "Body23", CreateDate: new Date(), Category: cat2, Author: usr3, Reviewer: usr5, Tags: [new $news.Types.TagConnection({ Tag: tag2 }), new $news.Types.TagConnection({ Tag: tag3 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article24", Lead: "Lead24", Body: "Body24", CreateDate: new Date(), Category: cat2, Author: usr4, Reviewer: usr4, Tags: [new $news.Types.TagConnection({ Tag: tag3 }), new $news.Types.TagConnection({ Tag: tag1 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article25", Lead: "Lead25", Body: "Body25", CreateDate: new Date(), Category: cat2, Author: usr5, Reviewer: usr3, Tags: [new $news.Types.TagConnection({ Tag: tag1 }), new $news.Types.TagConnection({ Tag: tag2 })] }));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article31", Lead: "Lead31", Body: "Body31", CreateDate: new Date(), Category: cat3, Author: usr1, Reviewer: usr2, Tags: [new $news.Types.TagConnection({ Tag: tag2 }), new $news.Types.TagConnection({ Tag: tag3 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article32", Lead: "Lead32", Body: "Body32", CreateDate: new Date(), Category: cat3, Author: usr2, Reviewer: usr1, Tags: [new $news.Types.TagConnection({ Tag: tag3 }), new $news.Types.TagConnection({ Tag: tag1 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article33", Lead: "Lead33", Body: "Body33", CreateDate: new Date(), Category: cat3, Author: usr3, Reviewer: usr6, Tags: [new $news.Types.TagConnection({ Tag: tag1 }), new $news.Types.TagConnection({ Tag: tag2 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article34", Lead: "Lead34", Body: "Body34", CreateDate: new Date(), Category: cat3, Author: usr4, Reviewer: usr5, Tags: [new $news.Types.TagConnection({ Tag: tag2 }), new $news.Types.TagConnection({ Tag: tag3 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article35", Lead: "Lead35", Body: "Body35", CreateDate: new Date(), Category: cat3, Author: usr5, Reviewer: usr4, Tags: [new $news.Types.TagConnection({ Tag: tag3 }), new $news.Types.TagConnection({ Tag: tag1 })] }));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article41", Lead: "Lead41", Body: "Body41", CreateDate: new Date(), Category: cat4, Author: usr1, Reviewer: usr3, Tags: [new $news.Types.TagConnection({ Tag: tag1 }), new $news.Types.TagConnection({ Tag: tag2 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article42", Lead: "Lead42", Body: "Body42", CreateDate: new Date(), Category: cat4, Author: usr2, Reviewer: usr2, Tags: [new $news.Types.TagConnection({ Tag: tag2 }), new $news.Types.TagConnection({ Tag: tag3 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article43", Lead: "Lead43", Body: "Body43", CreateDate: new Date(), Category: cat4, Author: usr3, Reviewer: usr1, Tags: [new $news.Types.TagConnection({ Tag: tag3 }), new $news.Types.TagConnection({ Tag: tag1 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article44", Lead: "Lead44", Body: "Body44", CreateDate: new Date(), Category: cat4, Author: usr4, Reviewer: usr6, Tags: [new $news.Types.TagConnection({ Tag: tag1 }), new $news.Types.TagConnection({ Tag: tag2 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article45", Lead: "Lead45", Body: "Body45", CreateDate: new Date(), Category: cat4, Author: usr5, Reviewer: usr5, Tags: [new $news.Types.TagConnection({ Tag: tag2 }), new $news.Types.TagConnection({ Tag: tag3 })] }));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article51", Lead: "Lead51", Body: "Body51", CreateDate: new Date(), Category: cat5, Author: usr1, Reviewer: usr4, Tags: [new $news.Types.TagConnection({ Tag: tag3 }), new $news.Types.TagConnection({ Tag: tag1 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article52", Lead: "Lead52", Body: "Body52", CreateDate: new Date(), Category: cat5, Author: usr2, Reviewer: usr3, Tags: [new $news.Types.TagConnection({ Tag: tag1 }), new $news.Types.TagConnection({ Tag: tag2 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article53", Lead: "Lead53", Body: "Body53", CreateDate: new Date(), Category: cat5, Author: usr3, Reviewer: usr2, Tags: [new $news.Types.TagConnection({ Tag: tag2 }), new $news.Types.TagConnection({ Tag: tag3 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article54", Lead: "Lead54", Body: "Body54", CreateDate: new Date(), Category: cat5, Author: usr4, Reviewer: usr1, Tags: [new $news.Types.TagConnection({ Tag: tag3 }), new $news.Types.TagConnection({ Tag: tag1 })] }));</span>
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article55", Lead: "Lead55", Body: "Body55", CreateDate: new Date(), Category: cat5, Author: usr5, Reviewer: usr6, Tags: [new $news.Types.TagConnection({ Tag: tag1 }), new $news.Types.TagConnection({ Tag: tag2 })] }));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    context.Articles.add(new $news.Types.Article({Title: "Article65", Lead: "Lead65", Body: "Body65", CreateDate: new Date(), Category: cat3, Author: usr6, Reviewer: usr5, Tags: [new $news.Types.TagConnection({ Tag: tag2 }), new $news.Types.TagConnection({ Tag: tag1 })] }));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    context.saveChanges(<span class="fstat-no" title="function not covered">function (count) {</span></span>
+<span class="cstat-no" title="statement not covered">        if (callBack) {</span>
+<span class="cstat-no" title="statement not covered">            callBack(count);</span>
+        }
+    });
+};
+&nbsp;
+module.exports = exports = $news.Types.NewsContext;
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Thu Apr 20 2017 16:36:51 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
